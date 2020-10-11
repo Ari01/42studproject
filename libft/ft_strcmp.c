@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 17:11:23 by denden            #+#    #+#             */
-/*   Updated: 2020/10/09 16:02:46 by denden           ###   ########.fr       */
+/*   Created: 2020/10/09 19:50:47 by denden            #+#    #+#             */
+/*   Updated: 2020/10/09 19:59:38 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-
-size_t	ft_strlen(const char *s)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t i;
+	int i;
 
 	i = 0;
-	while (s[i])
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	return (i);
+	if (s1[i] < s2[i])
+		return (-1);
+	else if (s1[i] == s2[i])
+		return (0);
+	return (1);
 }

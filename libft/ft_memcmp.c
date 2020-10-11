@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 17:11:23 by denden            #+#    #+#             */
-/*   Updated: 2020/10/09 16:02:46 by denden           ###   ########.fr       */
+/*   Created: 2020/10/11 12:11:22 by denden            #+#    #+#             */
+/*   Updated: 2020/10/11 13:28:33 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t	ft_strlen(const char *s)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t i;
+	unsigned char *_s1;
+	unsigned char *_s2;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	_s1 = (unsigned char *)s1;
+	_s2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*_s1 != *_s2)
+			return (*_s1 - *_s2);
+		_s1++;
+		_s2++;
+	}
+	return (0);
 }

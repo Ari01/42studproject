@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 17:11:23 by denden            #+#    #+#             */
-/*   Updated: 2020/10/09 16:02:46 by denden           ###   ########.fr       */
+/*   Created: 2020/10/09 16:19:27 by denden            #+#    #+#             */
+/*   Updated: 2020/10/10 21:01:31 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t	ft_strlen(const char *s)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t i;
+	char *_dest;
+	char *_src;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	_dest = (char *)dest;
+	_src = (char *)src;
+	while (n--)
+	{
+		*_dest = *_src;
+		_dest++;
+		_src++;
+	}
+	return (dest);
 }

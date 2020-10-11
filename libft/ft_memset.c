@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/08 17:11:23 by denden            #+#    #+#             */
-/*   Updated: 2020/10/09 16:02:46 by denden           ###   ########.fr       */
+/*   Created: 2020/10/08 20:51:29 by denden            #+#    #+#             */
+/*   Updated: 2020/10/09 16:39:41 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t	ft_strlen(const char *s)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	size_t i;
+	unsigned char	ccpy;
+	unsigned char	*str;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	ccpy = (unsigned char)c;
+	str = (unsigned char *)s;
+	while (n--)
+		*str++ = ccpy;
+	return (s);
 }
