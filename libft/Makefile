@@ -5,16 +5,11 @@ NAME			= libft.a
 TEST			= test
 LIB				= ar cr
 
-LIBDIR			= .
-BIN				= bin
-
 SRCS			= $(wildcard *.c)
 OBJS			= $(SRCS:.c=.o)
-LIBNAME			= ft
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
-LFLAGS			= -L $(LIBDIR) -l $(LIBNAME)
 RM				= rm -f
 
 
@@ -27,7 +22,7 @@ $(NAME) :		$(OBJS)
 				$(LIB) $@ $^
 
 .c.o :
-				$(CC) $(CFLAGS) $(LFLAGS) -c $< -o $(<:.c=.o)
+				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(TEST) :		$(OBJS)
 				$(CC) -o $@ $^
