@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:34:22 by denden            #+#    #+#             */
-/*   Updated: 2020/10/12 21:44:28 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 13:23:41 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 #include <string.h>
 
 /*
-**	STRINGS
+**	BASIC STRING MANIPULATION
 */
-
 char		*ft_strnew(size_t size);
 void		ft_strdel(char **as);
 void		ft_strclr(char *s);
@@ -35,6 +34,12 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strstr(const char *haystack, const char *needle);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
+
+/*
+**	ADVANCED STRING MANIPULATION
+*/
+char		*ft_strsub(char const *s, unsigned int start, size_t len);
+int			ft_atoi(const char *nptr);
 
 /*
 **	MEM

@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 17:30:00 by denden            #+#    #+#             */
-/*   Updated: 2020/10/12 18:24:48 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:37:01 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strstr(const char *haystack, const char *needle)
 {
 	char *res;
-	
+
 	res = NULL;
 	if (!(*needle))
 		return ((char *)haystack);

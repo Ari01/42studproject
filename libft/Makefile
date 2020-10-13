@@ -2,37 +2,45 @@
 
 
 NAME			= libft.a
-TEST			= test
 LIB				= ar cr
+TEST			= test
 
 SRCS			= $(wildcard *.c)
+FILES			= $(wildcard *fic)
 OBJS			= $(SRCS:.c=.o)
+
+INCLDDIR		= .
+TESTSDIR		= resources/tests/
+TESTS			= asciitest memtest stringtest advancedstringtest
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
+INCLDFLAGS		= -I $(INCLDDIR)
 RM				= rm -f
 
 
 # RULES 
 
 
-all :			$(NAME)
+all :				$(NAME)
 
-$(NAME) :		$(OBJS)
-				$(LIB) $@ $^
+$(NAME) :			$(OBJS)
+					$(LIB) $@ $^
+
+$(TEST) :			$(TESTS)
+
+$(TESTS) :			%: $(TESTSDIR)%.c $(OBJS)
+					$(CC) $(CFLAGS) $(INCLDFLAGS) -o $@ $^
 
 .c.o :
-				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-
-$(TEST) :		$(OBJS)
-				$(CC) -o $@ $^
+					$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean :
-				$(RM) $(OBJS)
+					$(RM) $(OBJS)
 
-fclean :		clean
-				$(RM) $(NAME) $(TEST)
+fclean :			clean
+					$(RM) $(NAME) $(TESTS) $(FILES)
 
-re :			fclean all
+re :				clean fclean all
 
-.PHONY :		all clean fclean re test
+.PHONY :			all clean fclean re test

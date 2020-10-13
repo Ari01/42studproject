@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:26:21 by denden            #+#    #+#             */
-/*   Updated: 2020/10/12 18:36:08 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:36:48 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	char *res;
-	
+
 	res = NULL;
 	if (!(*little))
 		return ((char *)big);

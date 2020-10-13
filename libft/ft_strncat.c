@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 22:43:21 by denden            #+#    #+#             */
-/*   Updated: 2020/10/11 22:51:01 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:33:34 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-	char *_dest;
+	char *destcpy;
 
-	_dest = dest;
+	destcpy = dest;
 	while (*dest)
 		dest++;
 	while (*src && n--)
@@ -26,5 +26,5 @@ char	*ft_strncat(char *dest, const char *src, size_t n)
 		src++;
 	}
 	*dest = 0;
-	return (_dest);
+	return (destcpy);
 }

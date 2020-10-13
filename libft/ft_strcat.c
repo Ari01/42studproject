@@ -6,15 +6,15 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 22:18:47 by denden            #+#    #+#             */
-/*   Updated: 2020/10/11 22:42:46 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:33:28 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcat(char *dest, const char *src)
 {
-	char *_dest;
+	char *destcpy;
 
-	_dest = dest;
+	destcpy = dest;
 	while (*dest)
 		dest++;
 	while (*src)
@@ -24,5 +24,5 @@ char	*ft_strcat(char *dest, const char *src)
 		src++;
 	}
 	*dest = 0;
-	return (_dest);
+	return (destcpy);
 }

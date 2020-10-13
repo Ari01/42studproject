@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 12:11:22 by denden            #+#    #+#             */
-/*   Updated: 2020/10/11 13:28:33 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:35:24 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char *_s1;
-	unsigned char *_s2;
+	unsigned char *s1cpy;
+	unsigned char *s2cpy;
 
-	_s1 = (unsigned char *)s1;
-	_s2 = (unsigned char *)s2;
+	s1cpy = (unsigned char *)s1;
+	s2cpy = (unsigned char *)s2;
 	while (n--)
 	{
-		if (*_s1 != *_s2)
-			return (*_s1 - *_s2);
-		_s1++;
-		_s2++;
+		if (*s1cpy != *s2cpy)
+			return (*s1cpy - *s2cpy);
+		s1cpy++;
+		s2cpy++;
 	}
 	return (0);
 }

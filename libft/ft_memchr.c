@@ -6,24 +6,24 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 01:01:55 by denden            #+#    #+#             */
-/*   Updated: 2020/10/11 01:39:45 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/13 14:34:33 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include <stdio.h>
+
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*_s;
-	unsigned char	_c;
+	unsigned char	*scpy;
+	unsigned char	ccpy;
 
-	_s = (unsigned char *)s;
-	_c = (unsigned char)c;
+	scpy = (unsigned char *)s;
+	ccpy = (unsigned char)c;
 	while (n--)
 	{
-		if (*_s == _c)
-			return ((void *)_s);
-		_s++;
+		if (*scpy == ccpy)
+			return ((void *)scpy);
+		scpy++;
 	}
 	return (NULL);
 }
