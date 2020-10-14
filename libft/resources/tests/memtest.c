@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 17:16:02 by denden            #+#    #+#             */
-/*   Updated: 2020/10/13 21:05:53 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/14 11:51:38 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	test_memset(int init_value, size_t size)
 		ft_memset(s2, init_value, sizeof(*s2) * size);
 		printf("string memset = %s, string ft_memeset = %s\n", s1, s2);
 		if (ft_strcmp(s1,s2))
-			printf("test ko\n");
+			printf("test ko\n\n");
 		else
-			printf("test ok\n");
+			printf("test ok\n\n");
 
 		// tests int
 		memset(t1, init_value, sizeof(*t1) * size);
@@ -110,9 +110,9 @@ void	test_memcpy_string(char *src, size_t n)
 		printf("memcpy = %s ft_memcpy = %s\n", dest2, dest1);
 
 		if (ft_strcmp(dest1, dest2))
-			printf("test ko\n");
+			printf("test ko\n\n");
 		else
-			printf("test ok\n");
+			printf("test ok\n\n");
 
 		ft_memdel((void *)&dest1);
 		ft_memdel((void *)&dest2);
@@ -132,7 +132,8 @@ void	test_memcpy_int(int init_value, size_t n)
 		printf("malloc returned null\n");
 	else
 	{
-		ft_memset(t1, init_value, sizeof(*t1) * 10);
+		for (int i = 0; i <10 ; i++)
+			t1[i] = init_value;
 		ft_memcpy(t2, t1, sizeof(*t1) * n);
 		memcpy(t3, t1, sizeof(*t1) * n);
 
@@ -172,7 +173,8 @@ void	test_memccpy_int(int init_value, int tofind, size_t n)
 		printf("malloc returned null\n");
 	else
 	{
-		ft_memset(t1, init_value, 10);
+		for (int i = 0; i <10; i++)
+			t1[i] = init_value;
 		res1 = memccpy(t2, t1, tofind, n * sizeof(*res1));
 		res2 = ft_memccpy(t3, t1, tofind, n * sizeof(*res2));
 
@@ -439,6 +441,14 @@ int	main()
 	test_memset(0, 10);
 	test_memset(2147483647, 10);
 	test_memset(-2147483648, 10);
+	test_memset(1, 10);
+	test_memset(10, 10);
+	test_memset('a', 10);
+	test_memset('a', 0);
+	test_memset('Z', 10);
+	test_memset(' ', 10);
+	test_memset('\t', 10);
+	test_memset('\n', 10);
 
 	printf("\nTEST MEMCPY ------------------------------\n");
 	char *src = "abc";

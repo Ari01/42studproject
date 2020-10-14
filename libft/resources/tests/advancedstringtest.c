@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   advancedstringtest.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 21:56:34 by denden            #+#    #+#             */
-/*   Updated: 2020/10/13 14:12:54 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/14 16:45:03 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	test_strsub(char const *src, char start, char end)
+void	ft_toupperbis(char *s)
+{
+	*s = ft_toupper(*s);
+}
+
+char	ft_toupperbisbis(char c)
+{
+	return (ft_toupper(c));
+}
+
+void	ft_odd_toupper(unsigned int i, char *s)
+{
+	if (!(i % 2))
+		*s = ft_toupper(*s);
+}
+
+void	test_strsub(char const *src, char start, char end, char *expectedsub)
 {
 	char *startptr;
 	char *endptr;
@@ -30,16 +46,21 @@ void	test_strsub(char const *src, char start, char end)
 	if (startptr && endptr)
 	{
 		if (endptr <= startptr)
-			printf("invalid subtring\n\n");
+			printf("test ok : invalid subtring\n\n");
 		else
 		{
 			len = endptr - startptr;
 			testsub = ft_strsub(src, startptr - src, len);
-			printf("subsrc = %s, len = %ld\n\n", testsub, ft_strlen(testsub));
+			printf("subsrc = %s, len = %ld\n", testsub, ft_strlen(testsub));
+			printf("expected sub = %s, len = %ld\n", expectedsub, ft_strlen(expectedsub));
+			if (ft_strcmp(testsub, expectedsub))
+				printf("test ko\n\n");
+			else
+				printf("test ok\n\n");
 		}
 	}
 	else
-		printf("invalid substring\n\n");
+		printf("test ok : invalid substring\n\n");
 }
 
 void	test_atoi(const char *nptr)
@@ -57,20 +78,95 @@ void	test_atoi(const char *nptr)
 		printf("test ko\n\n");
 }
 
+void	test_striter(char *s)
+{
+	int res = 1;
+
+	printf("before toupper :\ns = %s\n", s);
+	ft_striter(s, &ft_toupperbis);
+	printf("after toupper :\ns = %s\n", s);
+	while (*s)
+	{
+		if (*s >= 'a' && *s <= 'z')
+		{
+			res = 0;
+			break;
+		}
+		s++;
+	}
+	if (res)
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_striteri(char *s)
+{
+	int res = 1;
+
+	printf("before odd_toupper : \ns = %s\n", s);
+	ft_striteri(s, &ft_odd_toupper);
+	printf("after odd_toupper : \ns = %s\n", s);
+	while (*s)
+	{
+		if (*s >= 'a' && *s <= 'z')
+		{
+			res = 0;
+			break;
+		}
+		if (*(s + 1))
+			s += 2;
+		else
+			s++;
+	}
+	if (res)
+		printf("test ok\n");
+	else
+		printf("test ko\n");
+}
+
+void	test_strmap(char const *s)
+{
+	char *new = NULL;
+	int res = 1;
+
+	printf("before map\ns = %s\n", s);
+	new = ft_strmap(s, &ft_toupperbisbis);
+	printf("after map\ns = %s, new = %s\n", s, new);
+
+	while (*new && *s)
+	{
+		if (*new != *s && *new != *s - 32)
+		{
+			res = 0;
+			break;
+		}
+		new++;
+		s++;
+	}
+	if (*new || *s)
+		res = 0;
+	if (res)
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
 int	main(void)
 {
 	printf("TEST STRSUB -------------------------------------------------\n");
 	char src[1000];
 	ft_strcpy(src, "il etait une fois 42");
-	test_strsub(src, 'e', 0);
-	test_strsub(src, 'i', 0);
-	test_strsub(src, '2', 0);
-	test_strsub(src, '0', 0);
-	test_strsub(src, 0, 0);
-	test_strsub(src, 'i', 'l');
-	test_strsub(src, 'e', 'u');
-	test_strsub(src, 'u', 's');
-	test_strsub(" ", ' ', 0);
+	test_strsub(src, 'e', 0, ft_strchr(src, 'e'));
+	test_strsub(src, 'i', 0, ft_strchr(src, 'i'));
+	test_strsub(src, '2', 0, ft_strchr(src, '2'));
+	test_strsub(src, '0', 0, ft_strchr(src, '0'));
+	test_strsub(src, 0, 0, ft_strchr(src, 0));
+	test_strsub(" ", ' ', 0, " ");
+	test_strsub("", 'a', 0, "");
+	test_strsub(src, 'i', 'l', "i");
+	test_strsub(src, 'e', 'u', "etait ");
+	test_strsub(src, 'u', 's', "une foi");
 
 	printf("TEST ATOI ---------------------------------------------------\n");
 	// valid strings
@@ -116,6 +212,25 @@ int	main(void)
 	test_atoi("Z2147483647");
 	test_atoi("A-2147483648");
 	test_atoi("abcd");
+	test_atoi("");
+
+	printf("TEST FT_STRITER ---------------------------------------------------\n");
+	char s[100] = "iL eTAIt unE+fOIS\t42mots++-test   ";
+	test_striter(s);
+	ft_strcpy(s, "il etait une fois 42");
+	test_striter(s);
+
+	printf("TEST FT_STRITERI --------------------------------------------------\n");
+	ft_strcpy(s, "il etait une fois 42+\t-- ");
+	test_striteri(s);
+
+	printf("TEST STRMAP -------------------------------------------------------\n");
+	ft_strcpy(s, "il etait une fois 42");
+	test_strmap(s);
+	ft_strcpy(s, "IL ETAIT UNE FOIS 42");
+	test_strmap(s);
+	ft_strcpy(s, "");
+	test_strmap(s);
 
 	return (0);
 }

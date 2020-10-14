@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 16:34:22 by denden            #+#    #+#             */
-/*   Updated: 2020/10/13 13:23:41 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/14 13:33:32 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ char		*ft_strnstr(const char *big, const char *little, size_t len);
 /*
 **	ADVANCED STRING MANIPULATION
 */
-char		*ft_strsub(char const *s, unsigned int start, size_t len);
 int			ft_atoi(const char *nptr);
+char		*ft_strsub(char const *s, unsigned int start, size_t len);
+void		ft_striter(char *s, void (*f)(char *));
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
+char		*ft_strmap(char const *s, char (*f)(char));
 
 /*
 **	MEM
@@ -64,5 +67,12 @@ int			ft_isascii(int c);
 int			ft_isprint(int c);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
+
+/*
+**	PRINT
+*/
+void		ft_putchar(char c);
+void		ft_putstr(char const *s);
+void		ft_putendl(char const *s);
 
 #endif
