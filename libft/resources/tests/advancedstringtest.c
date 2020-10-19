@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 21:56:34 by denden            #+#    #+#             */
-/*   Updated: 2020/10/14 16:45:03 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/14 23:06:28 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	ft_odd_toupper(unsigned int i, char *s)
 {
 	if (!(i % 2))
 		*s = ft_toupper(*s);
+}
+
+char	ft_odd_toupperbis(unsigned int i, char c)
+{
+	if (!(i % 2))
+		return (ft_toupper(c));
+	return (c);
 }
 
 void	test_strsub(char const *src, char start, char end, char *expectedsub)
@@ -120,18 +127,21 @@ void	test_striteri(char *s)
 			s++;
 	}
 	if (res)
-		printf("test ok\n");
+		printf("test ok\n\n");
 	else
-		printf("test ko\n");
+		printf("test ko\n\n");
 }
 
-void	test_strmap(char const *s)
+void	test_strmap(char const *s, int which_func)
 {
 	char *new = NULL;
 	int res = 1;
 
 	printf("before map\ns = %s\n", s);
-	new = ft_strmap(s, &ft_toupperbisbis);
+	if (!which_func)
+		new = ft_strmap(s, &ft_toupperbisbis);
+	else
+		new = ft_strmapi(s, &ft_odd_toupperbis);
 	printf("after map\ns = %s, new = %s\n", s, new);
 
 	while (*new && *s)
@@ -147,6 +157,110 @@ void	test_strmap(char const *s)
 	if (*new || *s)
 		res = 0;
 	if (res)
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_strequ(char const *s1, char const *s2)
+{
+	int res1 = ft_strcmp(s1, s2);
+	int res2 = ft_strequ(s1, s2);
+
+	printf("s1 = %s\n", s1);
+	printf("s2 = %s\n", s2);
+	printf("cmp = %d, equ = %d\n", res1, res2);
+
+	if ((!res1 && res2) || (res1 && !res2))
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_strnequ(char const *s1, char const *s2, size_t n)
+{
+	int res1 = ft_strncmp(s1, s2, n);
+	int res2 = ft_strnequ(s1, s2, n);
+
+	printf("s1 = %s, size = %ld\n", s1, n);
+	printf("s2 = %s, size = %ld\n" , s2, n);
+
+	printf("res strncmp = %d\n", res1);
+	printf("res strnequ = %d\n", res2);
+
+	if ((!res1 && res2) || (res1 && !res2))
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_strjoin(char const *s1, char const *s2)
+{
+	char *join = ft_strjoin(s1, s2);
+	char *cpy = ft_strdup(s1);
+	char *cat = ft_strcat(cpy, s2);
+
+	printf("s1 = %s, s2 = %s\n", s1, s2);
+	printf("cat = %s\n", cat);
+	printf("join = %s\n", join);
+
+	if (!ft_strcmp(cat, join))
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_strtrim(char const *s, char const *expected)
+{
+	char *trim = ft_strtrim(s);
+
+	printf("s = %s\n", s);
+	printf("expected after trim = %s\n", expected);
+	printf("trim = %s\n", trim);
+
+	if (ft_strequ(trim, expected))
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_split(const char *s, char c, char *expected, int nwords)
+{
+	char **split = ft_strsplit(s, c);
+	char *join = 0;
+	int i = 0;
+	int len = 0;
+
+	printf("s = %s, sep = %c\n", s, c);
+	while (split[i])
+	{
+		printf("split[%d] = %s\n", i, split[i]);
+		len += ft_strlen(split[i]);
+		i++;
+	}
+
+	join = ft_strnew(sizeof(*join) * (len + 1));
+	i = 0;
+	while (split[i])
+	{
+		join = ft_strcat(join, split[i]);
+		i++;
+	}
+
+	if (ft_strequ(join, expected) && i == nwords)
+		printf("test ok\n\n");
+	else
+		printf("test ko\n\n");
+}
+
+void	test_itoa(int n, char *expected)
+{
+	char *itoa = ft_itoa(n);
+
+	printf("n = %d\n", n);
+	printf("itoa = %s\n", itoa);
+
+	if (ft_strequ(itoa, expected))
 		printf("test ok\n\n");
 	else
 		printf("test ko\n\n");
@@ -226,11 +340,78 @@ int	main(void)
 
 	printf("TEST STRMAP -------------------------------------------------------\n");
 	ft_strcpy(s, "il etait une fois 42");
-	test_strmap(s);
+	test_strmap(s, 0);
 	ft_strcpy(s, "IL ETAIT UNE FOIS 42");
-	test_strmap(s);
+	test_strmap(s, 0);
 	ft_strcpy(s, "");
-	test_strmap(s);
+	test_strmap(s, 0);
+
+	printf("TEST STRMAP -------------------------------------------------------\n");
+	ft_strcpy(s, "il etait une fois 42");
+	test_strmap(s, 1);
+	ft_strcpy(s, "IL ETAIT UNE FOIS 42");
+	test_strmap(s, 1);
+	ft_strcpy(s, "");
+	test_strmap(s, 1);
+
+	printf("TEST STREQU ------------------------------------------------------\n");
+	test_strequ("abc", "abc");
+	test_strequ("0123456789", "0123456789");
+	test_strequ("", "");
+	test_strequ("", "abc");
+	test_strequ("abc", "");
+	test_strequ("abd", "abz");
+	test_strequ("abz", "abd");
+	test_strequ(" ", "");
+	test_strequ("", " ");
+
+	printf("TEST STRNEQU -----------------------------------------------------\n");
+	test_strnequ("abc", "abc", 3);
+	test_strnequ("0123456789", "0123456789", 10);
+	test_strnequ("", "", 1);
+	test_strnequ("", "abc", 3);
+	test_strnequ("abc", "", 3);
+	test_strnequ("abd", "abz", 3);
+	test_strnequ("abz", "abd", 3);
+	test_strnequ(" ", "", 1);
+	test_strnequ("", " ", 1);
+	test_strnequ("abc", "abd", 2);
+	test_strnequ("abc", "abcde", 2);
+	test_strnequ("abcde", "abc", 2);
+	test_strnequ("abd", "abc", 2);
+	test_strnequ("azq", "aqz", 1);
+
+	printf("TEST STRJOIN -----------------------------------------------------\n");
+	test_strjoin("abc", "def");
+	test_strjoin("", "def");
+	test_strjoin("abc", "");
+	test_strjoin("", "");
+
+	printf("TEST STRTRIM -----------------------------------------------------\n");
+	strcpy(s, "il etait une fois 42");
+	test_strtrim("\n  \t\t   \t \t  \n", "");
+	test_strtrim("", "");
+	test_strtrim(" \n   \t \t \t  il etait une fois 42  \t \t \t  \n ", s);
+	test_strtrim(" il etait une fois 42 ", s);
+	test_strtrim(" il etait une fois 42", s);
+	test_strtrim("il etait une fois 42 ", s);
+	test_strtrim("il etait une fois 42\n", s);
+	test_strtrim("\nil etait une fois 42\n", s);
+	test_strtrim("\nil etait une fois 42\t ", s);
+
+	printf("TEST SPLIT --------------------------------------------------------\n");
+	test_split(" abc def ghi ", ' ', "abcdefghi", 3);
+	test_split("abc def", ' ', "abcdef", 2);
+	test_split("abc def", 0, "abc def", 1);
+	test_split("a ", ' ', "a", 1);
+	test_split(" a", ' ', "a", 1);
+	test_split("", ' ', "", 0);
+	test_split("", 0, "", 0);
+
+	printf("TEST ITOA ---------------------------------------------------------\n");
+	test_itoa(2147483647, "2147483647");
+	test_itoa(-2147483648, "-2147483648");
+	test_itoa(0, "");
 
 	return (0);
 }

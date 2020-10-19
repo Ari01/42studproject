@@ -6,12 +6,12 @@ LIB				= ar cr
 TEST			= test
 
 SRCS			= $(wildcard *.c)
-FILES			= $(wildcard *fic)
 OBJS			= $(SRCS:.c=.o)
 
 INCLDDIR		= .
 TESTSDIR		= resources/tests/
-TESTS			= asciitest memtest stringtest advancedstringtest
+TESTS			= asciitest memtest stringtest advancedstringtest printtest
+RMTESTS			= *test
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
@@ -39,7 +39,7 @@ clean :
 					$(RM) $(OBJS)
 
 fclean :			clean
-					$(RM) $(NAME) $(TESTS) $(FILES)
+					$(RM) $(NAME) $(RMTESTS)
 
 re :				clean fclean all
 

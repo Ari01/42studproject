@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 20:36:48 by denden            #+#    #+#             */
-/*   Updated: 2020/10/14 18:06:54 by denden           ###   ########.fr       */
+/*   Created: 2020/10/14 21:51:49 by denden            #+#    #+#             */
+/*   Updated: 2020/10/17 11:12:13 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+void	ft_putnbr(int n)
 {
-	char *str;
+	unsigned int ncpy;
 
-	str = (char *)ft_memalloc(sizeof(*str) * size);
-	if (!str)
-		return (NULL);
-	return (str);
+	ncpy = n;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		ncpy = -n;
+	}
+	if (ncpy < 10)
+		ft_putchar(ncpy + '0');
+	else
+	{
+		ft_putnbr(ncpy / 10);
+		ft_putchar(ncpy % 10 + '0');
+	}
 }

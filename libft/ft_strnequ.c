@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 20:36:48 by denden            #+#    #+#             */
-/*   Updated: 2020/10/14 18:06:54 by denden           ###   ########.fr       */
+/*   Created: 2020/10/14 17:43:52 by denden            #+#    #+#             */
+/*   Updated: 2020/10/14 18:01:12 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
-char	*ft_strnew(size_t size)
+int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	char *str;
-
-	str = (char *)ft_memalloc(sizeof(*str) * size);
-	if (!str)
-		return (NULL);
-	return (str);
+	while (*s1 && *s2 && *s1 == *s2 && --n)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+		return (1);
+	return (0);
 }

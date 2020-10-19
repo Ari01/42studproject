@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 20:36:48 by denden            #+#    #+#             */
-/*   Updated: 2020/10/14 18:06:54 by denden           ###   ########.fr       */
+/*   Created: 2020/10/17 10:38:09 by denden            #+#    #+#             */
+/*   Updated: 2020/10/17 10:42:37 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-char	*ft_strnew(size_t size)
+void	ft_putchar_fd(char c, int fd)
 {
-	char *str;
-
-	str = (char *)ft_memalloc(sizeof(*str) * size);
-	if (!str)
-		return (NULL);
-	return (str);
+	write(fd, &c, 1);
 }
