@@ -10,7 +10,7 @@ OBJS			= $(SRCS:.c=.o)
 
 INCLDDIR		= .
 TESTSDIR		= resources/tests/
-TESTS			= asciitest memtest stringtest advancedstringtest printtest
+TESTS			= asciitest memtest stringtest advancedstringtest printtest listtest
 RMTESTS			= *test
 
 CC				= gcc

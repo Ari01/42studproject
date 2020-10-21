@@ -6,7 +6,7 @@
 /*   By: denden <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 10:41:45 by denden            #+#    #+#             */
-/*   Updated: 2020/10/19 23:01:25 by denden           ###   ########.fr       */
+/*   Updated: 2020/10/21 16:26:57 by denden           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	get_next_line(const int fd, char **line)
 int	main()
 {
 	char *line = NULL;
-	char const *pathfile = "filetest";
+	char const *pathfile = "resources/tests/filetest";
 	int fd = open(pathfile, O_CREAT | O_TRUNC | O_RDWR);
 	int i = 0;
 	char **strs = malloc(sizeof(*strs) * 5);

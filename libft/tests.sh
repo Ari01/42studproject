@@ -9,3 +9,6 @@ echo "MEM TESTS" && ./memtest | grep -a -n "test ko"
 echo "\n"
 echo "PRINT TESTS" && ./printtest | grep -a -n "test ko"
 echo "\n"
+echo "LIST TESTS" && ./listtest | grep -a -n "test ko"
+echo "\n"
+
